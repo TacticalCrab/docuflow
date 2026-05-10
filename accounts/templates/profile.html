@@ -1,11 +1,15 @@
+{% extends "base.html" %}
+
 {% load profile_tags %}
 
+{% block title %}Profile {{request.user.username}}{% endblock %}
+
+{% block content %}
 <div class="profile-card">
     <h2>Your Account Details</h2>
     <p>Manage your DocuFlow identity</p>
 
     <div class="profile-grid">
-        {# We pipe request.user into your custom filter #}
         {% for item in request.user|get_user_profile_fields %}
             <div class="profile-item">
                 <span class="label">{{ item.label }}:</span>
@@ -18,7 +22,9 @@
         <small>Member since: {{ request.user.date_joined|date:"F d, Y" }}</small>
     </div>
 </div>
+{% endblock %}
 
+{% block extra_css %}
 <style>
     .profile-card {
     background: #ffffff;
@@ -90,3 +96,4 @@
     }
 }
 </style>
+{% endblock %}
