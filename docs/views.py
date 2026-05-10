@@ -4,7 +4,7 @@ from .models import Document
 from django.core.handlers.wsgi import WSGIRequest
 
 @login_required
-def edit_document(request: WSGIRequest, pk=None):
+def edit_document_view(request: WSGIRequest, pk=None):
     if pk:
         doc = get_object_or_404(Document, pk=pk, owner=request.user)
     else:
@@ -17,3 +17,8 @@ def edit_document(request: WSGIRequest, pk=None):
         return redirect("docs:edit_document", pk=doc.pk)
 
     return render(request, "markdown_editor.html", {"document": doc})
+
+@login_required
+def dashboard_view(request: WSGIRequest):
+    documents = request.user.documents.all().order_by("-updated_at")
+    return render(request, "dashboard.html", {"documents": documents})
