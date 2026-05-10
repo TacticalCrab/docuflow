@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load nav_active %}
+
+{% block body %}
+<div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <a href="/" class="sidebar-brand">
+            <span style="background: #0366d6; color: white; padding: 2px 8px; border-radius: 4px;">D</span>
+            DocuFlow
+        </a>
+
+        <nav class="nav-group">
+            <span class="nav-label">General</span>
+            <a href="{% url 'accounts:profile' %}" class="nav-item {% is_active 'accounts:profile' %}">🏠 Profile</a>
+            <a href="{% url 'docs:dashboard' %}" class="nav-item {% is_active 'docs:dashboard' %}">🏠 Dashboard</a>
+        </nav>
+
+        <nav class="nav-group">
+            <span class="nav-label">Recent Documents</span>
+            <!-- Loop through first 5 docs -->
+            {% for doc in sidebar_docs|slice:":5" %}
+                <a href="{% url 'docs:edit_document' doc.pk %}" class="nav-item {% is_active 'docs:edit_document' pk=doc.pk %}" style="font-size: 0.85rem;">
+                    📄 {{ doc.title|truncatechars:20 }}
+                </a>
+            {% endfor %}
+        </nav>
+        
+        <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid #e1e4e8;">
+        </div>
+    </aside>
+
+    <!-- Content -->
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+</div>
+{% endblock %}

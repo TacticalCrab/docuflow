@@ -21,3 +21,76 @@ h1, h2, h3, h4 {
 .form-group {
     margin-bottom: 1.5rem;
 }
+
+/* The Main Container for the whole app */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 260px;
+    background-color: #f6f8fa;
+    border-right: 1px solid #e1e4e8;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.sidebar-brand {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #24292e;
+    margin-bottom: 2rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Sidebar Navigation Links */
+.nav-group {
+    margin-bottom: 2rem;
+}
+
+.nav-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6a737d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    color: #24292e;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    transition: background 0.2s;
+}
+
+.nav-item:hover {
+    background-color: #ebedef;
+}
+
+.nav-item.active {
+    background-color: #0366d6;
+    color: white;
+}
+
+/* The Content Area */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    background-color: #ffffff;
+}
