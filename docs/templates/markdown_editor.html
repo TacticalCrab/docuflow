@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Markdown Sandbox | DocuFlow{% endblock %}
+
+{% block extra_css %}
+<style>
+    .view-container {
+        display: flex;
+        height: 70vh;
+        gap: 20px;
+        margin-top: 20px;
+    }
+    .editor-wrapper, .preview-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    textarea {
+        flex: 1;
+        padding: 20px;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 16px;
+        border: 1px solid #e1e4e8;
+        border-radius: 8px;
+        resize: none;
+        outline: none;
+    }
+    #preview {
+        flex: 1;
+        padding: 20px;
+        border: 1px solid #e1e4e8;
+        border-radius: 8px;
+        background-color: #f6f8fa;
+        overflow-y: auto;
+    }
+    .label { 
+        margin-bottom: 8px; font-weight: bold; color: #586069; 
+    }
+    .buttons-container {
+        display: flex;
+        padding: 10px;
+    }
+    .title-input {
+        width: 100px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h2>Markdown Editor</h2>
+<form method="POST">
+    {% csrf_token %}
+    <div>
+        <input 
+            type="text"
+            placeholder="Document Title"
+            class="input-field input-sm title-input" 
+            name="title" 
+            required 
+            minlength="3" 
+            maxlength="255"
+            oninvalid="this.setCustomValidity('Please enter a title between 3 and 100 characters')"
+            oninput="this.setCustomValidity('')"
+            value="{{document.title}}"
+        >
+    </div>
+    <div class="view-container">
+        <div class="editor-wrapper">
+            <span class="label">Markdown Input</span>
+            <textarea id="markdown-input" name="content" placeholder="Type some markdown here...">{{document.content}}</textarea>
+        </div>
+        <div class="preview-wrapper">
+            <span class="label">Live Preview</span>
+            <div id="preview" class="markdown-body"></div>
+        </div>
+    </div>
+    <div class="buttons-container">
+        <button type="submit" class="btn btn-primary btn-md">Save Document</button>
+    </div>
+</form>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Include a Markdown Parser from a CDN -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+    const input = document.getElementById('markdown-input');
+    const preview = document.getElementById('preview');
+
+    // Update the preview whenever the user types
+    input.addEventListener('input', (e) => {
+        const rawValue = e.target.value;
+        preview.innerHTML = marked.parse(rawValue);
+    });
+
+    preview.innerHTML = marked.parse(input.value);
+</script>
+{% endblock %}

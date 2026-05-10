@@ -1,0 +1,180 @@
+/* Base Button Styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    gap: 8px;
+    font-family: var(--font-main);
+}
+
+/* --- SIZE VARIANTS --- */
+
+/* Small (For tight spaces, navbars, or tables) */
+.btn-sm {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    border-radius: 4px;
+}
+
+/* Medium (Standard - your current size) */
+.btn-md {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+}
+
+/* Large (For primary actions, like "Create New Document") */
+.btn-lg {
+    padding: 0.8rem 1.8rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+}
+
+/* Primary: Action/Save (DocuFlow Blue) */
+.btn-primary {
+    background-color: #0366d6;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #005cc5;
+}
+.btn-primary:active {
+    transform: translateY(1px);
+}
+
+/* Secondary: Neutral/Edit */
+.btn-secondary {
+    background-color: #fafbfc;
+    border-color: #e1e4e8;
+    color: #24292e;
+}
+.btn-secondary:hover {
+    background-color: #f3f4f6;
+    border-color: #d1d5da;
+}
+
+/* Danger: Delete/Discard */
+.btn-danger {
+    background-color: #ffffff;
+    color: #d73a49;
+    border-color: #d73a49;
+}
+.btn-danger:hover {
+    background-color: #d73a49;
+    color: #ffffff;
+}
+
+/* Ghost: Minimalist/Sidebar links */
+.btn-ghost {
+    background: transparent;
+    color: #586069;
+}
+.btn-ghost:hover {
+    background-color: rgba(27, 31, 35, 0.05);
+    color: #24292e;
+}
+
+/* Disabled State */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    filter: grayscale(1);
+}
+
+/* Container for spacing */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* The Title Input (Bold, large, borderless style) */
+.input-title {
+    width: 100%;
+    font-size: 2.5rem;
+    font-weight: 700;
+    border: none;
+    outline: none;
+    color: #1b1f23;
+    background: transparent;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    font-family: var(--font-main);
+}
+
+.input-title::placeholder {
+    color: #d1d5da;
+}
+
+/* Standard Inputs (For Settings, Search, etc.) */
+.input-field {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    background-color: #fafbfc;
+    transition: all 0.2s ease-in-out;
+    font-family: inherit;
+}
+
+.input-sm { padding: 0.3rem 0.6rem; font-size: 0.85rem; }
+.input-md { padding: 0.6rem 0.8rem; font-size: 1rem; }
+.input-lg { padding: 0.8rem 1rem; font-size: 1.2rem; }
+
+/* Interactive States */
+.input-field:focus {
+    outline: none;
+    border-color: #0366d6;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.1);
+}
+
+/* The Editor Textarea */
+#markdown-input {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    padding: 20px;
+    font-family: var(--font-mono);
+    font-size: 15px;
+    resize: none;
+    line-height: 1.6;
+    background: #ffffff;
+    outline: none;
+}
+
+#markdown-input:focus {
+    border-color: #d1d5da;
+    box-shadow: inset 0 1px 2px rgba(27,31,35,0.075);
+}
+
+:root {
+    /* The "UI" font: Clean, professional, easy to read */
+    --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    
+    /* The "Editor" font: Perfectly aligned for coding and markdown */
+    --font-mono: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+}
+
+body {
+    font-family: var(--font-main);
+    color: #1b1f23;
+    line-height: 1.5;
+}
+
+/* Apply the mono font to your editor */
+#markdown-input {
+    font-family: var(--font-mono);
+    font-variant-ligatures: none;
+    line-height: 1.6;
+}
+
+/* Make headers pop */
+h1, h2, h3, h4 {
+    font-weight: 600;
+    color: #24292e;
+}
