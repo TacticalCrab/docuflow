@@ -1,0 +1,92 @@
+{% load profile_tags %}
+
+<div class="profile-card">
+    <h2>Your Account Details</h2>
+    <p>Manage your DocuFlow identity</p>
+
+    <div class="profile-grid">
+        {# We pipe request.user into your custom filter #}
+        {% for item in request.user|get_user_profile_fields %}
+            <div class="profile-item">
+                <span class="label">{{ item.label }}:</span>
+                <span class="value">{{ item.value|default:"—" }}</span>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="profile-meta">
+        <small>Member since: {{ request.user.date_joined|date:"F d, Y" }}</small>
+    </div>
+</div>
+
+<style>
+    .profile-card {
+    background: #ffffff;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 2rem auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.profile-card h2 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #24292e;
+    font-size: 1.5rem;
+}
+
+.profile-card p {
+    color: #586069;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+}
+
+/* The Grid Layout */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Stack on mobile */
+    gap: 1.5rem;
+    border-top: 1px solid #eaecef;
+    padding-top: 1.5rem;
+}
+
+/* Row Styling */
+.profile-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.profile-item .label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #6a737d;
+}
+
+.profile-item .value {
+    font-size: 1rem;
+    color: #24292e;
+    font-weight: 400;
+}
+
+/* Footer info */
+.profile-meta {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eaecef;
+    color: #959da5;
+    text-align: center;
+}
+
+/* Desktop optimization */
+@media (min-width: 480px) {
+    .profile-grid {
+        grid-template-columns: 1fr 1fr; /* Side-by-side on larger screens */
+    }
+}
+</style>
