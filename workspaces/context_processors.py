@@ -1,4 +1,4 @@
-from .models import Workspace
+from .models import Workspace, WorkspaceInvitation
 from django.http import HttpRequest
 
 def user_workspaces(request: HttpRequest):
@@ -8,3 +8,13 @@ def user_workspaces(request: HttpRequest):
         }
     else:
         return {}
+
+def user_invitations(request):
+    if request.user.is_authenticated:
+        return {
+            'pending_invites': WorkspaceInvitation.objects.filter(
+                email=request.user.email, 
+                accepted=False
+            )
+        }
+    return {}

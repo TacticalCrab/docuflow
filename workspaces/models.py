@@ -16,6 +16,9 @@ class Workspace(models.Model):
 
     def is_member(self, user):
         return self.memberships.filter(user=user).exists()
+    
+    def is_owner(self, user):
+        return self.get_user_role(user) == "owner"
 
     def can_edit(self, user):
         role = self.get_user_role(user)
@@ -40,3 +43,26 @@ class WorkspaceMember(models.Model):
 
     class Meta:
         unique_together = ('workspace', 'user')
+
+
+class WorkspaceInvitation(models.Model):
+    workspace = models.ForeignKey(
+        Workspace,
+        on_delete=models.CASCADE,
+        related_name="invitations"
+    )
+
+    email = models.EmailField()
+
+    role = models.CharField(
+        max_length=20,
+        choices=(("editor", "Editor"), ("reader", "reader")),
+        default="reader"
+    )
+
+    invited_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    accepted = models.BooleanField(default = False)
+

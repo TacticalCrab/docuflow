@@ -26,7 +26,8 @@ def create_document(request: WSGIRequest, slug):
     workspace = get_object_or_404(Workspace, slug=slug)
 
     if not workspace.can_edit(request.user):
-        return redirect("docs:dashboard")
+        messages.error(request, "You only have 'Reader' access to this workspace.")
+        return redirect("workspaces:workspace_dashboard", slug=slug)
 
     new_doc = Document.objects.create(
         title = request.POST.get('title', "Untitled"),
@@ -43,7 +44,7 @@ def save_document(request: WSGIRequest, pk):
 
     if not workspace.can_edit(request.user):
         messages.error(request, "You only have 'Reader' access to this workspace.")
-        return redirect("docs:dashboard")
+        return redirect("workspaces:workspace_dashboard", slug=workspace.slug)
 
     if request.method == "POST":
         title = request.POST.get('title')

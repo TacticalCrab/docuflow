@@ -25,6 +25,21 @@
                 {% endfor %}
                 <a href="{% url 'workspaces:create_workspace' %}" class="nav-item">+ Create Workspace</a>
             </div>
+            {% if pending_invites %}
+                <div class="invitation-alerts">
+                    <p>You have {{ pending_invites.count }} pending invite(s):</p>
+                    {% for invite in pending_invites %}
+                        <div class="invite-item">
+                            <span>{{ invite.workspace.name }}</span>
+                            <form action="{% url 'workspaces:respond_to_invite' invite.id %}" method="POST">
+                                {% csrf_token %}
+                                <button name="action" value="accept" class="btn-sm">Accept</button>
+                                <button name="action" value="decline" class="btn-sm btn-danger">×</button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </nav>
 
         <nav class="nav-group">

@@ -53,7 +53,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'docs.context_processors.sidebar_documents',
-                'workspaces.context_processors.user_workspaces'
+                'workspaces.context_processors.user_workspaces',
+                'workspaces.context_processors.user_invitations'
             ],
         },
     },
