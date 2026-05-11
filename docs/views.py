@@ -3,10 +3,10 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Document
 from workspaces.models import Workspace
-from django.core.handlers.wsgi import WSGIRequest
+from django.http import HttpRequest
 
 @login_required
-def edit_document_view(request: WSGIRequest, pk=None):
+def edit_document_view(request: HttpRequest, pk=None):
     if pk:
         doc = get_object_or_404(Document, pk=pk)
     else:
@@ -22,7 +22,7 @@ def edit_document_view(request: WSGIRequest, pk=None):
 
 
 @login_required
-def create_document(request: WSGIRequest, slug):
+def create_document(request: HttpRequest, slug):
     workspace = get_object_or_404(Workspace, slug=slug)
 
     if not workspace.can_edit(request.user):
@@ -38,7 +38,7 @@ def create_document(request: WSGIRequest, slug):
     return redirect("docs:edit_document", pk=new_doc.pk)
 
 @login_required
-def save_document(request: WSGIRequest, pk):
+def save_document(request: HttpRequest, pk):
     doc = get_object_or_404(Document, pk=pk)
     workspace = doc.workspace
 

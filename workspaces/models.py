@@ -38,7 +38,7 @@ class WorkspaceMember(models.Model):
     )
 
     workspace = models.ForeignKey(Workspace, on_delete=models.CASCADE, related_name="memberships")
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="memberships")
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default="reader")
 
     class Meta:

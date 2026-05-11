@@ -4,10 +4,10 @@ from .forms import DocuFlowRegistrationForm
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.core.handlers.wsgi import WSGIRequest
+from django.http import HttpRequest
 
 
-def register_view(request: WSGIRequest):
+def register_view(request: HttpRequest):
     if request.method == "POST":
         form = DocuFlowRegistrationForm(request.POST)
         if form.is_valid():
@@ -23,7 +23,7 @@ def register_view(request: WSGIRequest):
     })
 
 
-def login_view(request: WSGIRequest):
+def login_view(request: HttpRequest):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -38,5 +38,5 @@ def login_view(request: WSGIRequest):
 
 
 @login_required
-def profile_view(request: WSGIRequest):
+def profile_view(request: HttpRequest):
     return render(request, "profile.html")
