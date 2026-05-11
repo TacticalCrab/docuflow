@@ -14,7 +14,7 @@ def register_view(request: WSGIRequest):
             form.save()
             username = form.cleaned_data.get("username")
             messages.success(request, f"Account created for {username}")
-            return redirect("/accounts/login", permanent=True)
+            return redirect("accounts:login", permanent=True)
     else:
         form = DocuFlowRegistrationForm()
     
@@ -30,7 +30,7 @@ def login_view(request: WSGIRequest):
             user = form.get_user()
             login(request, user)
         
-            return redirect("/accounts/profile")
+            return redirect("accounts:profile")
     else:
         form = AuthenticationForm()
     

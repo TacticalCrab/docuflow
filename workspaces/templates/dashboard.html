@@ -2,8 +2,8 @@
 
 {% block content %}
 <div class="dashboard-header">
-    <h1>My Documents</h1>
-    <a href="{% url 'docs:create_document' %}" class="btn btn-primary btn-md">
+    <h1>{{ workspace.name }}</h1>
+    <a href="{% url 'docs:create_document' workspace.slug %}" class="btn btn-primary btn-md">
         <span>+</span> New Document
     </a>
 </div>
@@ -45,7 +45,7 @@
     <div class="empty-state">
         <h3>No documents found</h3>
         <p>Start your DocuFlow journey by creating your first document.</p>
-        <a href="{% url 'docs:create_document' %}" class="btn btn-primary">Create Now</a>
+        <a href="{% url 'docs:create_document' workspace.slug %}" class="btn btn-primary">Create Now</a>
     </div>
 {% endif %}
 {% endblock %}

@@ -1,0 +1,112 @@
+{% extends "app_layout.html" %}
+
+{% block content %}
+<div class="setup-container">
+    <div class="setup-card">
+        <div class="setup-header">
+            <h1>Create a New Workspace</h1>
+            <p>Workspaces are where your team collaborates on documents.</p>
+        </div>
+
+        <form method="POST" class="setup-form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="id_name">Workspace Name</label>
+                <input type="text" 
+                       name="name" 
+                       id="id_name" 
+                       class="form-control" 
+                       placeholder="e.g. Engineering Team, Marketing 2026" 
+                       required>
+                <small class="help-text">You can change this later in settings.</small>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Create Workspace</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block extra_css %}
+<style>
+.setup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    padding: 20px;
+}
+
+.setup-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    max-width: 500px;
+    width: 100%;
+    border: 1px solid #e1e4e8;
+}
+
+.setup-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #1f2328;
+}
+
+.setup-header p {
+    color: #636c76;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-primary {
+    background: #2f81f7;
+    color: white;
+    border: none;
+    flex: 2;
+}
+
+.btn-secondary {
+    background: #f6f8fa;
+    color: #24292f;
+    border: 1px solid #d0d7de;
+    flex: 1;
+}
+</style>
+{% endblock %}

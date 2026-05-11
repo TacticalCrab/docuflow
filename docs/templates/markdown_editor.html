@@ -3,8 +3,8 @@
 {% block title %}Markdown Sandbox | DocuFlow{% endblock %}
 
 {% block content %}
-<h2>Markdown Editor</h2>
-<form method="POST">
+<h2>Markdown Editor ({{workspace.name}})</h2>
+<form method="POST" action="{% url 'docs:save_document' document.pk %}">
     {% csrf_token %}
     <div>
         <input 
@@ -30,9 +30,11 @@
             <div id="preview" class="markdown-body"></div>
         </div>
     </div>
-    <div class="buttons-container">
-        <button type="submit" class="btn btn-primary btn-md">Save Document</button>
-    </div>
+    {% if can_edit %}
+        <div class="buttons-container">
+            <button type="submit" class="btn btn-primary btn-md">Save Document</button>
+        </div>
+    {% endif %}
 </form>
 {% endblock %}
 

@@ -15,7 +15,16 @@
         <nav class="nav-group">
             <span class="nav-label">General</span>
             <a href="{% url 'accounts:profile' %}" class="nav-item {% is_active 'accounts:profile' %}">🏠 Profile</a>
-            <a href="{% url 'docs:dashboard' %}" class="nav-item {% is_active 'docs:dashboard' %}">🏠 Dashboard</a>
+            <div class="workspace-switcher">
+                <span class="nav-label">Your Workspaces</span>
+                {% for ws in my_workspaces %}
+                    <a href="{% url 'workspaces:workspace_dashboard' ws.slug %}" 
+                        class="nav-item {% if workspace.slug == ws.slug %}active{% endif %}">
+                        🏢 {{ ws.name }}
+                    </a>
+                {% endfor %}
+                <a href="{% url 'workspaces:create_workspace' %}" class="nav-item">+ Create Workspace</a>
+            </div>
         </nav>
 
         <nav class="nav-group">

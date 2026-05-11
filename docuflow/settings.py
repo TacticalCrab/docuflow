@@ -26,7 +26,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "accounts",
-    "docs"
+    "docs",
+    "workspaces"
 ]
 
 MIDDLEWARE = [
@@ -51,7 +52,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'docs.context_processors.sidebar_documents'
+                'docs.context_processors.sidebar_documents',
+                'workspaces.context_processors.user_workspaces'
             ],
         },
     },
@@ -110,3 +112,5 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+LOGIN_URL = 'accounts:login'
