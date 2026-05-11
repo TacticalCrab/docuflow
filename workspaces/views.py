@@ -36,7 +36,7 @@ def create_workspace(request: HttpRequest):
             role="owner"
         )
 
-        redirect(f"workspaces:workspace_dashboard {workspace.slug}")
+        redirect("workspaces:workspace_dashboard", slug=workspace.slug)
 
     return render(request, "create_workspace.html")
 
